@@ -14,4 +14,28 @@ public class UserService {
         User savedUser = userRepository.save(user);
         return savedUser;
     }
+
+    public User getUserById(int userId){
+        User user = userRepository.findById(userId);
+        return user;
+    }
+
+    public User updateUserById(int userId, User userDetails){
+        User updatedUser = userRepository.findById(userId);
+
+        updatedUser.setFirst_name(userDetails.getFirst_name());
+        updatedUser.setLast_name(userDetails.getLast_name());
+        updatedUser.setEmail(userDetails.getEmail());
+        updatedUser.setPassword(userDetails.getPassword());
+
+        userRepository.save(updatedUser);
+
+        return updatedUser;
+    }
+
+    public User deleteById(int userId){
+        User user = userRepository.findById(userId);
+        userRepository.delete(user);
+        return user;
+    }
 }
